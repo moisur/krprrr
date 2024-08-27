@@ -82,11 +82,11 @@ export default function CatalogPage() {
                   <div className="space-y-2">
                     {allSizes.map((size) => (
                       <div key={size} className="flex items-center">
-                        <Checkbox 
-                          id={size} 
-                          checked={filters.size.includes(size)}
-                          onValueChange={() => handleFilterChange('size', size)}
-                        />
+                      <Checkbox
+                        id={size}
+                        checked={filters.size.includes(size)}
+                        onChange={() => handleFilterChange('size', size)} // Use the correct prop name
+                      />
                         <label htmlFor={size} className="ml-2">{size}</label>
                       </div>
                     ))}

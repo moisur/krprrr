@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Star, Truck, RefreshCw, ShieldCheck, Minus, Plus } from 'lucide-react'
-import { products, getSimilarProducts, getRecommendedProducts } from "../../data/product"
+import { products, getSimilarProducts, getRecommendedProducts,Product } from "../../data/product"
 import { useParams } from 'next/navigation'
 import { useCart, CartProvider } from '../../cart/page'
 import { useToast } from "@/components/ui/use-toast"
@@ -43,8 +43,8 @@ function ProductPageContent() {
     return <div className="container mx-auto px-4 py-8">Product not found</div>
   }
 
-  const similarProducts = getSimilarProducts(product.id)
-  const recommendedProducts = getRecommendedProducts(product.id)
+  const similarProducts = getSimilarProducts(product.id).filter((p): p is Product => p !== undefined)
+  const recommendedProducts = getRecommendedProducts(product.id).filter((p): p is Product => p !== undefined)
 
   const handleAddToCart = () => {
     const item = {
