@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ShoppingCart, User, LogOut } from "lucide-react"
+import { ShoppingCart, User, LogOut, Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -11,6 +11,7 @@ import { useState, useEffect } from "react"
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -31,62 +32,116 @@ export default function Header() {
     }
   }
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   return (
-    <header className="flex items-center justify-between p-4 bg-black text-white">
-      <Link href="/" className="flex items-center space-x-2">
-        <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/krprss-OmdvgZZOpNNfVNVqT1xuq16FVgQXUo.png"
-          alt="KRPRSS Logo"
-          width={120}
-          height={40}
-          className="object-contain"
-        />
-      </Link>
-      <nav className="hidden md:flex space-x-4">
-        <Link href="/catalog" className="hover:text-gray-300">Catalogue</Link>
-        <Link href="/about" className="hover:text-gray-300">À propos</Link>
-        <Link href="/contact" className="hover:text-gray-300">Contact</Link>
-      </nav>
-      <div className="flex items-center space-x-4">
-        <form onSubmit={handleSearch} className="relative text-black">
-          <Input
-            className="w-64 pr-10"
-            placeholder="Rechercher..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+    <header className="bg-black text-white">
+      <div className="flex items-center justify-between p-4">
+        <Link href="/" className="flex items-center space-x-2">
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/krprss-OmdvgZZOpNNfVNVqT1xuq16FVgQXUo.png"
+            alt="KRPRSS Logo"
+            width={120}
+            height={40}
+            className="object-contain"
           />
-          <Button
-            type="submit"
-            variant="ghost"
-            className="absolute right-0 top-0 h-full px-3 text-black"
-          >
-            🔍
-          </Button>
-        </form>
-        <Link href="/cart">
-          <Button variant="ghost" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-            <span className="sr-only">Panier</span>
-          </Button>
         </Link>
-        {isLoggedIn ? (
-          <>
-            <Button variant="ghost" size="icon" onClick={() => router.push('/profile')}>
-              <User className="h-5 w-5" />
-              <span className="sr-only">Profil</span>
+        <nav className="hidden md:flex space-x-4">
+          <Link href="/catalog" className="hover:text-gray-300">Catalogue</Link>
+          <Link href="/about" className="hover:text-gray-300">À propos</Link>
+          <Link href="/contact" className="hover:text-gray-300">Contact</Link>
+        </nav>
+        <div className="flex items-center space-x-4">
+          <form onSubmit={handleSearch} className="relative text-black hidden md:block">
+            <Input
+              className="w-64 pr-10"
+              placeholder="Rechercher..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Button
+              type="submit"
+              variant="ghost"
+              className="absolute right-0 top-0 h-full px-3 text-black"
+            >
+              🔍
             </Button>
-            <Button variant="ghost" size="icon" onClick={handleLogout}>
-              <LogOut className="h-5 w-5" />
-              <span className="sr-only">Déconnexion</span>
+          </form>
+          <Link href="/cart">
+            <Button variant="ghost" size="icon">
+              <ShoppingCart className="h-5 w-5" />
+              <span className="sr-only">Panier</span>
             </Button>
-          </>
-        ) : (
-          <>
-            <Button className="text-black" variant="outline" onClick={() => router.push('/login')}>Connexion</Button>
-            <Button onClick={() => router.push('/signup')}>Inscription</Button>
-          </>
-        )}
+          </Link>
+          <div className="hidden md:block">
+            {isLoggedIn ? (
+              <>
+                <Button variant="ghost" size="icon" onClick={() => router.push('/profile')}>
+                  <User className="h-5 w-5" />
+                  <span className="sr-only">Profil</span>
+                </Button>
+                <Button variant="ghost" size="icon" onClick={handleLogout}>
+                  <LogOut className="h-5 w-5" />
+                  <span className="sr-only">Déconnexion</span>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button className="text-black" variant="outline" onClick={() => router.push('/login')}>Connexion</Button>
+                <Button onClick={() => router.push('/signup')}>Inscription</Button>
+              </>
+            )}
+          </div>
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
       </div>
+      {isMenuOpen && (
+        <div className="md:hidden p-4 bg-gray-900">
+          <nav className="flex flex-col space-y-2">
+            <Link href="/catalog" className="hover:text-gray-300">Catalogue</Link>
+            <Link href="/about" className="hover:text-gray-300">À propos</Link>
+            <Link href="/contact" className="hover:text-gray-300">Contact</Link>
+          </nav>
+          <form onSubmit={handleSearch} className="relative text-black mt-4">
+            <Input
+              className="w-full pr-10"
+              placeholder="Rechercher..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Button
+              type="submit"
+              variant="ghost"
+              className="absolute right-0 top-0 h-full px-3 text-black"
+            >
+              🔍
+            </Button>
+          </form>
+          <div className="mt-4">
+            {isLoggedIn ? (
+              <div className="flex flex-col space-y-2">
+                <Button variant="outline" onClick={() => router.push('/profile')}>
+                  <User className="h-5 w-5 mr-2" />
+                  Profil
+                </Button>
+                <Button variant="outline" onClick={handleLogout}>
+                  <LogOut className="h-5 w-5 mr-2" />
+                  Déconnexion
+                </Button>
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-2">
+                <Button className="text-black" variant="outline" onClick={() => router.push('/login')}>Connexion</Button>
+                <Button onClick={() => router.push('/signup')}>Inscription</Button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   )
 }
