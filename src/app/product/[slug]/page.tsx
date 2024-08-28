@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import { useCart } from '../../cart/page'
+import { useCart } from '../../../components/cart/CartContext'
 import { useToast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { products, getSimilarProducts, getRecommendedProducts, Product } from "../../data/product"

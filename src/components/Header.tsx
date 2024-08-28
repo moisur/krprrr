@@ -7,12 +7,18 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import { useCart } from "./cart/CartContext"
+import { getTotalItems } from '../lib/cartUtils'
+import CartIcon from "./cart/CartIcon"
+import CartDropdown from "./CartDropdown"
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false)
   const router = useRouter()
+  const { cart } = useCart()
 
   useEffect(() => {
     const token = localStorage.getItem('userToken')
@@ -35,7 +41,9 @@ export default function Header() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen)
+  }
   return (
     <header className="bg-black text-white">
       <div className="flex items-center justify-between p-4">
@@ -70,9 +78,14 @@ export default function Header() {
             </Button>
           </form>
           <Link href="/cart">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="relative">
               <ShoppingCart className="h-5 w-5" />
               <span className="sr-only">Panier</span>
+              {getTotalItems(cart) > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {getTotalItems(cart)}
+                </span>
+              )}
             </Button>
           </Link>
           <div className="hidden md:block">
