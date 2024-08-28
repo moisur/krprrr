@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import { getFeaturedProducts } from "../app/data/product"
+import Link from "next/link"
+import { slugify } from "../utils/stringUtils"
 
 export default function ProduitsEnVedette() {
   const featuredProducts = getFeaturedProducts()
@@ -13,16 +15,18 @@ export default function ProduitsEnVedette() {
         {featuredProducts.map((product) => (
           <Card key={product.id}>
             <CardContent className="p-4">
-              <Image
-                src={product.images[0]}
-                alt={product.name}
-                width={300}
-                height={300}
-                className="rounded-lg mb-2"
-              />
-              <h3 className="font-semibold">{product.name}</h3>
-              <p className="text-muted-foreground">{product.price.toFixed(2)} €</p>
-              <Button className="w-full mt-2">Ajouter au panier</Button>
+              <Link href={`/product/${slugify(product.name)}`}>
+                <Image
+                  src={product.images[0]} 
+                  alt={product.name}
+                  width={300}
+                  height={300}
+                  className="rounded-lg mb-2"
+                />
+                <h3 className="font-semibold">{product.name}</h3>
+                <p className="text-muted-foreground">{product.price.toFixed(2)} €</p>
+                <Button className="w-full mt-2">Ajouter au panier</Button>
+              </Link>
             </CardContent>
           </Card>
         ))}

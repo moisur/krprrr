@@ -20,6 +20,11 @@ export interface Product {
     tags: string[];
   }
   
+  export interface Category {
+    id: string;
+    name: string;
+    image: string;
+  }
   interface Review {
     author: string;
     content: string;

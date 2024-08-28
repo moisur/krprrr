@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import Image from "next/image"
 import Link from "next/link"
 import { products, categories } from "../data/product"
+import { slugify } from '@/utils/stringUtils'
 
 export default function CatalogPage() {
   const [filters, setFilters] = useState({
@@ -101,7 +102,7 @@ export default function CatalogPage() {
             {filteredProducts.map((product) => (
               <Card key={product.id}>
                 <CardContent className="p-4">
-                  <Link href={`/product/${product.id}`}>
+                  <Link href={`/product/${slugify(product.name)}`}>
                     <Image
                       src={product.images[0]}
                       alt={product.name}

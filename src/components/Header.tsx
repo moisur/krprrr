@@ -48,7 +48,7 @@ export default function Header() {
         <Link href="/contact" className="hover:text-gray-300">Contact</Link>
       </nav>
       <div className="flex items-center space-x-4">
-        <form onSubmit={handleSearch} className="relative">
+        <form onSubmit={handleSearch} className="relative text-black">
           <Input
             className="w-64 pr-10"
             placeholder="Rechercher..."
@@ -58,7 +58,7 @@ export default function Header() {
           <Button
             type="submit"
             variant="ghost"
-            className="absolute right-0 top-0 h-full px-3"
+            className="absolute right-0 top-0 h-full px-3 text-black"
           >
             🔍
           </Button>
@@ -82,7 +82,7 @@ export default function Header() {
           </>
         ) : (
           <>
-            <Button variant="outline" onClick={() => router.push('/login')}>Connexion</Button>
+            <Button className="text-black" variant="outline" onClick={() => router.push('/login')}>Connexion</Button>
             <Button onClick={() => router.push('/signup')}>Inscription</Button>
           </>
         )}
