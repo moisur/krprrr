@@ -1,47 +1,42 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 
-// Composants personnalisés
+import toutou from '../../../public/chien.jpg' 
 
 export default function AboutPage() {
-  const category = {
-    name: "À propos de KPRSKR",
-    description: "Découvrez l'univers déjanté de la marque la plus stylée de Paris.",
-    imageUrl: "/images/kprskr-logo.jpg" // Remplacez par le chemin d'image réel
-  }
-
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* En-tête de la catégorie pour styliser la section */}
+      <h1 className="text-4xl font-bold text-center mb-8">KPRSKR</h1>
 
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Section à propos */}
         <div className="md:w-2/3">
-          <h2 className="text-4xl font-bold mb-4">Qui sommes-nous ?</h2>
           <p className="mb-6 text-lg">
-            **KPRSKR** n'est pas juste une marque, c'est une explosion de créativité au cœur de Paris. 
-            Nous fusionnons l'avant-garde et l'irrévérence pour créer des pièces qui vous feront 
-            sortir du lot. Si vous cherchez des vêtements qui défient les normes et cassent les codes, 
-            vous êtes au bon endroit !
+            Foutez la paix avec les marques qui vous disent ce qu'il faut penser. <span className="font-bold">KPRSKR</span>, c'est une <span className="font-bold">putain</span> de rébellion contre la banalité. C'est le reflet de tous ces rebelles qui ont toujours voulu se démarquer, comme moi. C'est la marque qui fait peur aux <span className="font-bold">normes</span>, qui <span className="font-bold">brise</span> les codes, qui défie le conformisme. 
           </p>
-          <h3 className="text-3xl font-bold mb-4">Notre Mission</h3>
           <p className="mb-6 text-lg">
-            Chez **KPRSKR**, nous croyons que la mode doit être une forme d'expression libre et 
-            débridée. Notre mission ? Transformer chaque coin de rue parisien en un podium où vous pouvez 
-            montrer votre style sans limites.
+            Quand j'étais gosse, j'adorais le <span className="font-bold">Goéland</span>. C'était la marque des <span className="font-bold">rebelles</span>, des <span className="font-bold">skateurs</span>, des <span className="font-bold">métalleux</span>. J'ai toujours rêvé de créer mes propres vêtements, des vêtements qui reflètent la <span className="font-bold">liberté</span>, l'<span className="font-bold">originalité</span>, la <span className="font-bold">folie</span>. 
           </p>
-          <h3 className="text-3xl font-bold mb-4">Pourquoi KPRSKR ?</h3>
           <p className="mb-6 text-lg">
-            Pourquoi ce nom ? Parce que **KPRSKR** c'est une énigme, un code secret, un jeu de lettres 
-            aussi imprévisible que nos créations. C'est un clin d'œil à l'art de se démarquer tout en 
-            restant insaisissable.
+            <span className="font-bold">KPRSKR</span>, c'est l'<span className="font-bold">absurde</span> incarné. Le nom est une <span className="font-bold">énigme</span>, un <span className="font-bold">jeu de lettres</span> qui fait penser aux mots de passe des <span className="font-bold">rebelles</span>. C'est un clin d'œil à l'art de se démarquer tout en restant <span className="font-bold">insaisissable</span>. Et nos vêtements ? C'est un mélange d'<span className="font-bold">absurdité</span>, d'<span className="font-bold">humour</span>, de <span className="font-bold">provocation</span>. On mélange les <span className="font-bold">betteraves</span> avec des <span className="font-bold">matelas</span>, on fait des collabs avec des <span className="font-bold">artistes</span> qui défoncent les codes.
+          </p>
+          <p className="mb-6 text-lg">
+            Foutez la paix avec le conformisme. <span className="font-bold">Rejoignez la rébellion</span>. Achetez un vêtement <span className="font-bold">KPRSKR</span>. Et faites vivre votre <span className="font-bold">rebelle intérieur</span>.
+          </p>
+          <p className="mb-6 text-lg">
+            N'oubliez pas, c'est plus qu'une marque, c'est un <span className="font-bold">mouvement</span>. Un mouvement qui défie les <span className="font-bold">normes</span>, qui célèbre l'<span className="font-bold">individualité</span>, qui s'amuse de l'<span className="font-bold">absurde</span> et qui donne envie de se réveiller son <span className="font-bold">rebelle intérieur</span>.  Eugène Schwartz serait fier de vous!
           </p>
         </div>
 
-        {/* Section Image ou contenu additionnel */}
         <div className="md:w-1/3">
-          <img src={category.imageUrl} alt="KPRSKR Logo" className="rounded-lg shadow-lg" />
+          <Image
+            src={toutou}
+            alt="KPRSKR Logo"
+            className="rounded-lg shadow-lg"
+            width={400}
+            height={400}
+          />
         </div>
       </div>
     </div>
